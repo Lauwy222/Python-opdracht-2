@@ -1,10 +1,14 @@
-def buitenste_functie(boodschap):
+def buitenste_functie(functie):
     def binnenste_functie():
         print('Binnenste functie gestart')
-        print(boodschap)
-        print('Binnenste functie gestopt')
-    return binnenste_functie()
+        result = functie()
+        print('buitenste functie gestopt')
+        return result
+    return binnenste_functie
 
-hallo_func = buitenste_functie('Wazza')
+@buitenste_functie
+def toon_hallo():
+    print('hallo')
 
-hallo_func()
+# hallo_func = buitenste_functie(toon_hallo)
+toon_hallo()

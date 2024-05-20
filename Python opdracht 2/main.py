@@ -1,14 +1,18 @@
-def buitenste_functie(functie):
-    def binnenste_functie():
-        print('Binnenste functie gestart')
-        result = functie()
-        print('buitenste functie gestopt')
+# Definieer de decorator-functie
+def sum_decorator(func):
+    def wrapper(*args, **kwargs):
+        print("before execution")
+        result = func(*args, **kwargs)
+        print("after execution")
         return result
-    return binnenste_functie
+    return wrapper
 
-@buitenste_functie
-def toon_hallo():
-    print('hallo')
+# Pas de decorator toe op de functie sum_two_numbers
+@sum_decorator
+def sum_two_numbers(a, b):
+    print("inside the function")
+    return a + b
 
-# hallo_func = buitenste_functie(toon_hallo)
-toon_hallo()
+# Testprogramma
+a, b = 123, 456
+print("sum =", sum_two_numbers(a, b))

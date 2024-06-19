@@ -1,18 +1,24 @@
-# Definieer de decorator-functie
+from functools import wraps
+
+# Definieer de decorator
 def sum_decorator(func):
+    @wraps(func)
     def wrapper(*args, **kwargs):
-        print("before execution")
+        # Print een bericht voor de functie-uitvoering
+        print(f"Functie {func.__name__} wordt aangeroepen met args: {args} en kwargs: {kwargs}")
+        # Voer de oorspronkelijke functie uit
         result = func(*args, **kwargs)
-        print("after execution")
+        # Print een bericht na de functie-uitvoering
+        print(f"Functie {func.__name__} heeft geretourneerd: {result}")
         return result
     return wrapper
 
-# Pas de decorator toe op de functie sum_two_numbers
+# Gebruik de decorator boven de functie
 @sum_decorator
 def sum_two_numbers(a, b):
-    print("inside the function")
     return a + b
 
 # Testprogramma
-a, b = 123, 456
-print("sum =", sum_two_numbers(a, b))
+if __name__ == "__main__":
+    result = sum_two_numbers(69, 420)
+    print(f"Resultaat: {result}")
